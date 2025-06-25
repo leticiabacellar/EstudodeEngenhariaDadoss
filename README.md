@@ -130,6 +130,7 @@ spark.stop()
 
 
 
+
 # **Apache** Hadoop
 
 Vamos agora entender **o que é o Hadoop**, desde a teoria até a prática, com foco em como ele funciona, para que serve e como você pode usá-lo (inclusive comparando com o Spark quando for útil).
