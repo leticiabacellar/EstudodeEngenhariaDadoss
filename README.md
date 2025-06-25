@@ -478,3 +478,58 @@ https://www.youtube.com/watch?v=UJG0zj1rPbY&list=PLeblJhqzZe1rszn0z3wqE5ETilASaJ
 https://youtu.be/wDn7GwF-UYQ?si=uXQOvdYFQnZU1M1p
 
 https://youtu.be/xPtUcHn3qFI?si=7YGtSyoqbxPDHurF
+
+
+
+
+
+
+
+# 🔄 Qual é a diferença entre Apache Spark, Apache Hadoop e Apache NiFi?
+
+✨ Vamos comparar **Apache Spark**, **Apache Hadoop** e **Apache NiFi**, explicando o que cada um faz, quando usar e como eles se complementam — porque eles **não são concorrentes diretos**, mas sim **ferramentas para diferentes etapas do ciclo de dados**.
+
+---
+
+## 🔍 Diferença entre Spark, Hadoop e NiFi
+
+| Característica       | **Apache Hadoop**                    | **Apache Spark**                          | **Apache NiFi**                                 |
+|----------------------|--------------------------------------|-------------------------------------------|-------------------------------------------------|
+| 📌 Função principal   | Armazenamento + processamento        | Processamento distribuído na memória      | Orquestração e movimentação de dados            |
+| 🔄 Tipo de tarefa     | Batch (lote)                         | Batch e Streaming                         | Streaming e Batch (ingestão de dados)           |
+| 🧠 Modelo de execução | MapReduce (mais lento)              | DAG otimizado (muito mais rápido)         | Fluxos visuais com processadores                |
+| 🧰 Interface          | Linha de comando / scripts           | Programação (PySpark, Scala, etc.)        | Interface gráfica drag-and-drop                 |
+| 💾 Armazenamento      | HDFS                                 | Usa HDFS, S3, bancos, etc.                | Apenas conecta — **não armazena** dados         |
+| 🔁 Fluxo de dados     | Manual                               | Transformação e análise                   | Automatiza **de onde os dados vêm e vão**       |
+| ⚡ Performance         | Lento (grava tudo em disco)          | Rápido (em memória)                       | Rápido para orquestração e ingestão             |
+| 🔌 Integrações        | Hive, HBase, Pig, Sqoop              | Kafka, SQL, MLlib, Delta Lake, etc.       | APIs, Kafka, S3, bancos, Spark, tudo            |
+| 🔐 Segurança / Gestão | ACLs, Kerberos                      | ACLs, Spark UI                            | Segurança granular, monitoramento visual        |
+
+---
+
+## 📊 Em resumo:
+
+| Ferramenta   | Ideal para...                                                                 |
+|--------------|-------------------------------------------------------------------------------|
+| **NiFi**     | *Mover* dados entre sistemas (arquivos, APIs, bancos, etc.) com lógica visual |
+| **Hadoop**   | *Armazenar* grandes volumes de dados distribuídos + processar via MapReduce  |
+| **Spark**    | *Processar* e *analisar* grandes volumes com alta performance (ML e streaming) |
+
+---
+
+## 🧩 Exemplo prático combinando os três:
+
+**Cenário: ETL completo para dados de vendas**
+
+1. **NiFi**: Coleta os arquivos de vendas de um FTP ou API e salva no HDFS ou banco  
+2. **Hadoop (HDFS)**: Armazena todos os arquivos brutos de forma segura e distribuída  
+3. **Spark (PySpark)**: Processa e analisa os dados do HDFS, calcula métricas e exporta para um dashboard (Power BI, por exemplo)
+
+---
+
+## 🧠 Dica de aprendizado:
+
+- 🔄 **NiFi**: pense como *automação de pipelines*
+- 📦 **Hadoop**: pense como *um grande disco virtual e robusto*
+- 🔥 **Spark**: pense como *um motor de processamento super-rápido*
+
