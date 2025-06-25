@@ -303,3 +303,178 @@ hadoop jar hadoop-streaming.jar \
 - https://youtu.be/pcAdeZ5fLB8?si=z1TzOSMEzbLda232  
 - https://www.youtube.com/watch?v=NmzNlov-HOI&list=PLFJLvHW_AAoCgaQLMu9tgYyOtc0m3-tDV  
 
+
+
+
+
+
+
+
+# Apache NiFi
+
+Vamos falar agora sobre o **Apache NiFi**, uma ferramenta super útil principalmente para quem trabalha com **dados em movimento (streaming ou ETL)**.
+
+---
+
+## 🌊 O que é o Apache NiFi?
+
+O **Apache NiFi** é uma **ferramenta gráfica para automação de fluxo de dados**. Ele permite que você **movimente, transforme, integre e monitore dados entre sistemas**, de forma simples e visual.
+
+---
+
+## 🧠 Conceito Teórico
+
+### 🧩 O que o NiFi faz?
+
+- Coleta dados de múltiplas fontes
+- Faz transformações nos dados
+- Envia os dados para outros sistemas (bancos, APIs, nuvens, etc.)
+- Tudo isso com um **fluxo visual (drag-and-drop)**
+
+---
+
+### ⚙️ Componentes principais
+
+| Componente | Função |
+| --- | --- |
+| **Processor** | Bloco que executa uma tarefa (ex: `GetFile`, `PutSQL`, `UpdateAttribute`) |
+| **FlowFile** | É o "pacote de dados" que circula nos fluxos. Tem conteúdo + atributos |
+| **Connection** | Liga os Processors e controla o fluxo (buffers, prioridades) |
+| **Controller Service** | Configura conexões externas (bancos, APIs etc.) |
+| **Process Group** | Um agrupamento de Processors (tipo uma "caixinha" de ETL) |
+| **Templates** | Fluxos que podem ser exportados/importados |
+
+---
+
+### 📍 Como funciona o fluxo
+
+1. **Entrada**: Coleta arquivos, dados de APIs, bancos, Kafka, etc.
+2. **Processamento**: Filtra, converte, transforma, adiciona campos.
+3. **Saída**: Envia os dados para bancos, S3, outro sistema, etc.
+
+---
+
+## 🧪 Exemplo prático simples
+
+### 🎯 Objetivo:
+
+Mover dados de um arquivo CSV local para um banco de dados MySQL.
+
+### ⚙️ Processadores usados:
+
+1. `GetFile` – Lê o arquivo CSV
+2. `UpdateAttribute` – Renomeia o arquivo (opcional)
+3. `ConvertRecord` – Converte de CSV para JSON ou Avro
+4. `PutDatabaseRecord` – Insere os dados no banco MySQL
+
+---
+
+## 🧑‍💻 Como usar o NiFi na prática
+
+### 🛠️ 1. Instalação
+
+Você pode rodar localmente:
+
+```bash
+bash
+CopiarEditar
+wget https://downloads.apache.org/nifi/current/nifi-*-bin.zip
+unzip nifi-*.zip
+cd nifi-*/bin
+./nifi.sh start
+
+```
+
+Acesse no navegador:
+
+```
+bash
+CopiarEditar
+http://localhost:8080/nifi
+
+```
+
+---
+
+### 🧱 2. Montando um fluxo
+
+Na interface gráfica:
+
+1. Arraste o `GetFile`
+2. Configure o caminho da pasta de entrada
+3. Conecte ao `ConvertRecord` (para tratar o CSV)
+4. Conecte ao `PutDatabaseRecord` (conexão com banco)
+5. Configure a conexão JDBC no Controller Services
+
+---
+
+### 📈 Monitoramento
+
+- Cada Processador mostra: quantidade de arquivos, bytes processados, taxa de erro
+- Logs detalhados em cada FlowFile
+
+---
+
+### 🔐 Segurança
+
+- Criptografia (TLS)
+- Controle de acesso (usuários, grupos, permissões)
+- Versionamento e auditoria de fluxos
+
+---
+
+## 🧩 Conectores prontos
+
+O NiFi já vem com mais de **280 processadores**. Exemplos:
+
+| Fonte/Destino | Processador |
+| --- | --- |
+| Arquivos locais | `GetFile`, `PutFile` |
+| APIs REST | `InvokeHTTP` |
+| Banco de dados | `ExecuteSQL`, `PutDatabase` |
+| Kafka | `ConsumeKafka`, `PublishKafka` |
+| S3, GCS, Azure Blob | `FetchS3Object`, `PutGCSObject` |
+| Email | `GetSMTP`, `PutEmail` |
+
+---
+
+## 🧠 Quando usar o NiFi?
+
+Use quando você quer:
+
+✅ Criar ETLs visuais
+
+✅ Fazer ingestão de dados em tempo real
+
+✅ Monitorar o fluxo de dados com facilidade
+
+✅ Orquestrar processos com vários sistemas
+
+✅ Integrar APIs, bancos e arquivos sem código complexo
+
+---
+
+## ⚡ Comparativo com outras ferramentas
+
+| Ferramenta | Foco principal | Visual? | Tempo real? |
+| --- | --- | --- | --- |
+| Apache NiFi | Fluxo de dados | ✅ | ✅ |
+| Airflow | Orquestração de tarefas | ❌ (mais técnico) | ❌ (batch) |
+| Apache Spark | Processamento em memória | ❌ | ✅ (com Structured Streaming) |
+| Talend, Pentaho | ETL tradicional | ✅ | ❌ |
+
+---
+
+## 💡 Projeto prático sugerido
+
+**Pipeline com NiFi:**
+
+- Entrada: pasta com arquivos `.csv` de vendas
+- Processamento: filtrar colunas e converter para JSON
+- Saída: inserir os dados em um banco MySQL ou PostgreSQL
+
+https://www.youtube.com/watch?v=UJG0zj1rPbY&list=PLeblJhqzZe1rszn0z3wqE5ETilASaJoUX
+
+https://youtu.be/wDn7GwF-UYQ?si=uXQOvdYFQnZU1M1p
+
+https://youtu.be/xPtUcHn3qFI?si=7YGtSyoqbxPDHurF
